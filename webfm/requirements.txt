@@ -1,9 +1,0 @@
-gunicorn
-webob
-parse
-requests-wsgi-adapter
-
-jinja2
-
-pytest
-pytest-cov
