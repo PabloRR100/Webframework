@@ -1,4 +1,3 @@
-import pytest
 
 from constants import BASE_URL
 
@@ -39,7 +38,7 @@ def test_template(api, client):
 
 
 def test_404_is_returned_for_nonexistent_static_file(client):
-    assert client.get(f"http://testserver/main.css)").status_code == 404
+    assert client.get(f"http://testserver/static/main.css)").status_code == 404
 
 
 def test_assets_are_served(tmpdir_factory):
@@ -48,7 +47,7 @@ def test_assets_are_served(tmpdir_factory):
     api = API(static_dir=str(static_dir))
     client = api.test_session()
 
-    response = client.get(f"http://testserver/{FILE_DIR}/{FILE_NAME}")
+    response = client.get(f"http://testserver/static/{FILE_DIR}/{FILE_NAME}")
 
     assert response.status_code == 200
     assert response.text == FILE_CONTENTS
