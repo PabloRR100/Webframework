@@ -9,7 +9,7 @@ web_app = API(templates_dir="templates")
 def home(request, response):
     response.text = "Hello from the HOME page"
     response.body = web_app.template(
-        "home.html",
+        template_name="home.html",
         context={
             "title": "Awesome Framework",
             "name": "Bumbo"
@@ -38,10 +38,20 @@ class BooksResource:
 
 @web_app.route("/template")
 def template_handler(req, resp):
-    resp.body = web_app.template(
+    resp.html = web_app.template(
         "index.html",
         context={"name": "Bumbo", "title": "Best Framework"}
     ).encode()
+
+
+@web_app.route("/json")
+def json_handler(req, resp):
+    resp.json = {"name": "data", "type": "JSON"}
+
+
+@web_app.route("/text")
+def text_handler(req, resp):
+    resp.text = "This is a simple text"
 
 
 @web_app.route("/exception")
